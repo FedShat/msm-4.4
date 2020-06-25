@@ -455,6 +455,24 @@ void tfa98xx_rev(int *major, int *minor, int *revision)
 	sscanf(version_str, "v%d.%d.%d", major, minor, revision);
 }
 
+enum tfa_error tfa98xxTotfa(enum Tfa98xx_Error err)
+{
+	switch(err) {
+	case Tfa98xx_Error_Ok:
+		return tfa_error_ok;
+	case Tfa98xx_Error_Device:
+		return tfa_error_device;
+	case Tfa98xx_Error_Bad_Parameter:
+		return tfa_error_bad_param;
+	case Tfa98xx_Error_NoClock:
+		return tfa_error_noclock;
+	case Tfa98xx_Error_StateTimedOut:
+		return tfa_error_timeout;
+	default:
+		return tfa_error_bad_param;
+	}
+}
+
 /**
  * tfa_supported_speakers
  *  returns the number of the supported speaker count
@@ -3058,7 +3076,7 @@ error_exit:
 	pr_debug("[NXP] %s end...\n", __func__);
 	show_current_state(tfa);
 
-	return err;
+	return tfa98xxTotfa(err);
 }
 
 enum tfa_error tfa_dev_stop(struct tfa_device *tfa)
@@ -3074,8 +3092,8 @@ enum tfa_error tfa_dev_stop(struct tfa_device *tfa)
 
 	/* powerdown CF */
 	err = tfa98xx_powerdown(tfa, 1);
-	if (err != Tfa98xx_Error_Ok)
-		return err;
+	if ( err != Tfa98xx_Error_Ok)
+		return tfa98xxTotfa(err);
 
 	/* disable I2S output on TFA1 devices without TDM */
 	err = tfa98xx_aec_output(tfa, 0);
@@ -3091,7 +3109,7 @@ enum tfa_error tfa_dev_stop(struct tfa_device *tfa)
 	}
 	/* added by nxp34663 end. */
 
-	return err;
+	return tfa98xxTotfa(err);
 }
 
 /*
@@ -3560,14 +3578,14 @@ enum tfa_error tfa_dev_set_state(struct tfa_device *tfa, enum tfa_state state)
 
 		/* Make sure the DSP is running! */
 		do {
-			err = tfa98xx_dsp_system_stable(tfa, &ready);
+			err = tfa98xxTotfa(tfa98xx_dsp_system_stable(tfa, &ready));
 			if (err != tfa_error_ok)
 				return err;
 			if (ready)
 				break;
 		} while (loop--);
 		/* Enable FAIM when clock is stable, to avoid MTP corruption */
-		err = tfa98xx_faim_protect(tfa, 1);
+		err = tfa98xxTotfa(tfa98xx_faim_protect(tfa, 1));
 		if (tfa->verbose) {
 			pr_debug("FAIM enabled (err:%d).\n", err);
 		}
@@ -3591,7 +3609,7 @@ enum tfa_error tfa_dev_set_state(struct tfa_device *tfa, enum tfa_state state)
 				count--;
 			}
 		}
-		err = tfa98xx_faim_protect(tfa, 0);
+		err = tfa98xxTotfa(tfa98xx_faim_protect(tfa, 0));
 		if (tfa->verbose) {
 			pr_debug("FAIM disabled (err:%d).\n", err);
 		}
@@ -3712,10 +3730,10 @@ enum tfa_error tfa_dev_mtp_set(struct tfa_device *tfa, enum tfa_mtp item, int va
 
 	switch (item) {
 		case TFA_MTP_OTC:
-			err = tfa98xx_set_mtp(tfa, (uint16_t)value, TFA98XX_KEY2_PROTECTED_MTP0_MTPOTC_MSK);
+			err = tfa98xxTotfa(tfa98xx_set_mtp(tfa, (uint16_t)value, TFA98XX_KEY2_PROTECTED_MTP0_MTPOTC_MSK));
 			break;
 		case TFA_MTP_EX:
-			err = tfa98xx_set_mtp(tfa, (uint16_t)value, TFA98XX_KEY2_PROTECTED_MTP0_MTPEX_MSK);
+			err = tfa98xxTotfa(tfa98xx_set_mtp(tfa, (uint16_t)value, TFA98XX_KEY2_PROTECTED_MTP0_MTPEX_MSK));
 			break;
 		case TFA_MTP_RE25:
 		case TFA_MTP_RE25_PRIM:
@@ -3814,7 +3832,7 @@ enum Tfa98xx_Error tfa_status(struct tfa_device *tfa)
 
 int tfa_plop_noise_interrupt(struct tfa_device *tfa, int profile, int vstep)
 {
-	enum Tfa98xx_Error err;
+	enum tfa_error err;
 	int no_clk=0;
 
 	/* Remove sticky bit by reading it once */
