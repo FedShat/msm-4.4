@@ -637,3 +637,7 @@
 &qcom_qbt1000 {
 	status = "disabled";
 };
+
+&i2c_1 {
+    qcom,clk-freq-out = <1000000>;
+};
