@@ -6,15 +6,15 @@ jobs:
    steps:
       - run:
           command: |
-           apt-get -y update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install bc build-essential zip gcc clang libc6 curl libstdc++6 git wget libssl-dev zstd python python3 python3-pip openjdk-11-jdk openjdk-11-jre
+           apt-get -y update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install bc build-essential zip gcc clang libc6 curl libstdc++6 git wget libssl-dev zstd python python3 python3-pip openjdk-11-jdk openjdk-11-jre gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
            git clone --depth=1 https://github.com/FedorShatokhin2005/msm-4.4 -b $CIRCLE_BRANCH ~/build/msm-4.4
            git clone https://github.com/AlpacaGang/PublishBot ~/build/bot
            cd ~/build/bot
            pip3 install -r requirements.txt
            cd ..
            wget https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar -O ~/zipsigner-3.0.jar
-           git clone https://github.com/arter97/arm64-gcc.git --depth=50 ~/build/tools/arm64-gcc
-           git clone https://github.com/arter97/arm32-gcc.git --depth=50 ~/build/tools/arm32-gcc 
+           git clone https://github.com/kdrag0n/proton-clang --depth=1 ~/build/proton-clang
+           export PATH="$HOME/build/proton-clang/bin:$PATH"
            git clone https://github.com/AlpacaGang/AnyKernel3 ~/build/AK3
            cd msm-4.4
            python3 ../bot/kernel.py
