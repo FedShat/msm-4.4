@@ -215,6 +215,9 @@ struct sdm660_cdc_priv {
 	/* Entry for version info */
 	struct snd_info_entry *entry;
 	struct snd_info_entry *version_entry;
+#ifdef CONFIG_MACH_XIAOMI_PLATINA
+	bool micb1_always_on;
+#endif
 };
 
 struct sdm660_cdc_pdata {
