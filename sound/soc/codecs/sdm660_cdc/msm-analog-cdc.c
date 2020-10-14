@@ -28,7 +28,7 @@
 #include <sound/soc-dapm.h>
 #include <sound/tlv.h>
 #include <sound/q6core.h>
-#ifdef CONFIG_MACH_XIAOMI_PLATINA
+#ifdef CONFIG_MACH_XIAOMI_NITROGEN
 #include <soc/qcom/socinfo.h>
 #endif
 #include "msm-analog-cdc.h"
@@ -4655,9 +4655,10 @@ err:
 	return;
 }
 
-#ifdef CONFIG_MACH_XIAOMI_PLATINA
+#if defined(CONFIG_MACH_XIAOMI_PLATINA) || defined(CONFIG_MACH_XIAOMI_NITROGEN)
 static bool chk_hw_va(void)
 {
+#ifdef CONFIG_MACH_XIAOMI_NITROGEN
 	int hw_platform, hw_major, hw_minor;
 
 	hw_platform = get_hw_version_platform();
@@ -4675,6 +4676,9 @@ static bool chk_hw_va(void)
 	}
 
 	return false;
+#else
+	return false;
+#endif
 }
 #endif
 

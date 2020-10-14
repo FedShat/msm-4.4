@@ -45,7 +45,9 @@
 #include <linux/regulator/consumer.h>
 #include <linux/kthread.h>
 #include <linux/version.h>
+#ifdef CONFIG_MACH_XIAOMI_NITROGEN
 #include <soc/qcom/socinfo.h>
+#endif
 
 #include "dbmdx-interface.h"
 #include "dbmdx-customer.h"
@@ -14839,6 +14841,7 @@ static struct platform_driver dbmdx_platform_driver = {
 
 bool dbmdx_chk_hw(void)
 {
+#ifdef CONFIG_MACH_XIAOMI_NITROGEN
 	int hw_platform, hw_major, hw_minor;
 
 	hw_platform = get_hw_version_platform();
@@ -14858,6 +14861,9 @@ bool dbmdx_chk_hw(void)
 	printk("%s: Hardware does NOT support dbmd4.\n", __func__);
 
 	return false;
+#else
+	return false;
+#endif
 }
 
 static int __init dbmdx_modinit(void)
