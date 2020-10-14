@@ -350,6 +350,7 @@ obj-$(CONFIG_SND_SOC_WCD9320)	+= snd-soc-wcd9320.o
 obj-$(CONFIG_SND_SOC_WCD9330)	+= snd-soc-wcd9330.o
 obj-$(CONFIG_SND_SOC_WCD9335)	+= snd-soc-wcd9335.o
 obj-$(CONFIG_SND_SOC_WCD934X)	+= wcd934x/
+obj-$(CONFIG_SND_SOC_TAS2559)	+= tas2559/
 ifeq ($(CONFIG_COMMON_CLK_MSM), y)
 	obj-$(CONFIG_AUDIO_EXT_CLK)	+= audio-ext-clock.o
 endif
@@ -428,4 +429,6 @@ obj-$(CONFIG_SND_SOC_MAX9877)	+= snd-soc-max9877.o
 obj-$(CONFIG_SND_SOC_TPA6130A2)	+= snd-soc-tpa6130a2.o
 obj-y += sdm660_cdc/
 obj-y += msm_sdw/
+obj-$(CONFIG_SND_SOC_DBMDX)	+= dbmdx/
 obj-$(CONFIG_SND_SOC_MAX98937) += max98937/
+obj-$(CONFIG_SND_SOC_TFA9894)	+= tfa98xx/
