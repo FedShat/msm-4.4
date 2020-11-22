@@ -14,6 +14,7 @@ jobs:
            cd ..
            wget https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar -O ~/zipsigner-3.0.jar
            git clone https://github.com/arter97/arm64-gcc.git --depth=50 ~/build/tools/arm64-gcc
+           git clone https://github.com/arter97/arm32-gcc.git --depth=50 ~/build/tools/arm32-gcc 
            git clone https://github.com/AlpacaGang/AnyKernel3 ~/build/AK3
            cd msm-4.4
            python3 ../bot/kernel.py
