@@ -70,12 +70,17 @@ obj-$(CONFIG_TOUCHSCREEN_STMPE)		+= stmpe-ts.o
 obj-$(CONFIG_TOUCHSCREEN_SUN4I)		+= sun4i-ts.o
 obj-$(CONFIG_TOUCHSCREEN_SUR40)		+= sur40.o
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_DSX_v21) += synaptics_dsx/
+ifneq ($(CONFIG_MACH_XIAOMI_PLATINA),y)
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_TCM) += synaptics_tcm/
+else
+obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_TCM) += synaptics_tcm_platina/
+endif
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_DSX_FORCE) += synaptics_dsx_force/
 obj-$(CONFIG_TOUCHSCREEN_NVT_D2S) 	+= nvt_touch_d2s/
 obj-$(CONFIG_TOUCHSCREEN_FOCAL_FT8719)  += focal_ft8719/
 obj-$(CONFIG_TOUCHSCREEN_NVT_A) 	+= nvt_touch_a/
 obj-$(CONFIG_TOUCHSCREEN_NVT_F7A) 	+= nvt_touch_f7a/
+obj-$(CONFIG_TOUCHSCREEN_NVT_PLATINA) 	+= nvt_touch_platina/
 obj-$(CONFIG_TOUCHSCREEN_TI_AM335X_TSC)	+= ti_am335x_tsc.o
 obj-$(CONFIG_TOUCHSCREEN_TOUCHIT213)	+= touchit213.o
 obj-$(CONFIG_TOUCHSCREEN_TOUCHRIGHT)	+= touchright.o
