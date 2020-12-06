@@ -56,7 +56,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea0>;
 			efficiency = <1024>;
-			capacity-dmips-mhz = <513>;
 			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L2_0: l2-cache {
@@ -87,7 +86,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea1>;
 			efficiency = <1024>;
-			capacity-dmips-mhz = <513>;
 			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L1_I_1: l1-icache {
@@ -112,7 +110,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea2>;
 			efficiency = <1024>;
-			capacity-dmips-mhz = <513>;
 			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L1_I_2: l1-icache {
@@ -137,7 +134,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs0>;
 			qcom,ea = <&ea3>;
 			efficiency = <1024>;
-			capacity-dmips-mhz = <513>;
 			sched-energy-costs = <&CPU_COST_0 &CLUSTER_COST_0>;
 			next-level-cache = <&L2_0>;
 			L1_I_3: l1-icache {
@@ -162,7 +158,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea4>;
 			efficiency = <1638>;
-			capacity-dmips-mhz = <1024>;
 			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L2_1: l2-cache {
@@ -191,7 +186,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea5>;
 			efficiency = <1638>;
-			capacity-dmips-mhz = <1024>;
 			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L1_I_101: l1-icache {
@@ -216,7 +210,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea6>;
 			efficiency = <1638>;
-			capacity-dmips-mhz = <1024>;
 			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L1_I_102: l1-icache {
@@ -241,7 +234,6 @@
 			qcom,lmh-dcvs = <&lmh_dcvs1>;
 			qcom,ea = <&ea7>;
 			efficiency = <1638>;
-			capacity-dmips-mhz = <1024>;
 			sched-energy-costs = <&CPU_COST_1 &CLUSTER_COST_1>;
 			next-level-cache = <&L2_1>;
 			L1_I_103: l1-icache {
@@ -301,9 +293,13 @@
 
 		CPU_COST_0: core-cost0 {
 			busy-cost-data = <
-				1843200 1221
-				1747200 1180
-				1401600 1024
+				 633600 23
+				 902400 139
+				1113600 259
+				1401600 482
+				1536000 690
+				1747200 870
+				1843200 1102
 			>;
 			idle-cost-data = <
 				20 16 12 8
@@ -311,10 +307,12 @@
 		};
 		CPU_COST_1: core-cost1 {
 			busy-cost-data = <
-				2150400 1575
-				1747200 1537
-				2208000 1492
-				1401600 1414
+				1113600 749
+				1401600 1443
+				1747200 2576
+				1958400 4153
+				2150400 5941
+				2208000 6688
 			>;
 			idle-cost-data = <
 				100 80 60 40
@@ -322,7 +320,11 @@
 		};
 		CLUSTER_COST_0: cluster-cost0 {
 			busy-cost-data = <
+				 633600 8
+				 902400 14
+				1113600 20
 				1401600 29
+				1536000 35
 				1747200 49
 				1843200 62
 			>;
@@ -332,8 +334,10 @@
 		};
 		CLUSTER_COST_1: cluster-cost1 {
 			busy-cost-data = <
+				1113600 135
 				1401600 193
 				1747200 272
+				1958400 363
 				2150400 519
 				2208000 585
 			>;
@@ -1470,15 +1474,24 @@
 		qcom,governor-per-policy;
 
 		qcom,cpufreq-table-0 =
+			<  633600 >,
+			<  902400 >,
+			< 1113600 >,
 			< 1401600 >,
+			< 1536000 >,
+			< 1612800 >,
 			< 1747200 >,
 			< 1843200 >;
 
 		qcom,cpufreq-table-4 =
+			< 1113600 >,
 			< 1401600 >,
 			< 1747200 >,
+			< 1804800 >,
+			< 1958400 >,
 			< 2150400 >,
-			< 2208000 >;
+			< 2208000 >,
+			< 2457600 >;
 	};
 
 	sdhc_1: sdhci@c0c4000 {
