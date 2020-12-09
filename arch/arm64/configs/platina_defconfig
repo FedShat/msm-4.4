@@ -518,7 +518,7 @@ CONFIG_RANDOMIZE_MODULE_REGION_FULL=y
 # Boot options
 #
 # CONFIG_ARM64_ACPI_PARKING_PROTOCOL is not set
-CONFIG_CMDLINE="ramoops_memreserve=4M isolcpus=1-7 nohz_full=1-7 loglevel=0 printk.devkmsg=on"
+CONFIG_CMDLINE="ramoops_memreserve=4M"
 # CONFIG_CMDLINE_FROM_BOOTLOADER is not set
 CONFIG_CMDLINE_EXTEND=y
 # CONFIG_CMDLINE_FORCE is not set
