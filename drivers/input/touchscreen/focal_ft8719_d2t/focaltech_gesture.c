@@ -625,7 +625,7 @@ int fts_gesture_init(struct fts_ts_data *ts_data)
 	}
 #endif
 
-	fts_gesture_data.mode = DISABLE;
+	fts_gesture_data.mode = ENABLE;
 	fts_gesture_data.active = DISABLE;
 
 	FTS_FUNC_EXIT();
